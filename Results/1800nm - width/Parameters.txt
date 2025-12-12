@@ -1,0 +1,13 @@
+
++200 width
+
+
+## Set simulation parameters
+dx, dy = 10, 10 # [nm] resolution
+h_core = 600 # [nm] waveguide core height
+b_clad = 2500 # [nm] waveguide top and bottom clad
+h_clad = 1500 # [nm] waveguide top and bottom clad
+w_core = 1800 # [nm] waveguide core width
+w_trench = 2500 # [nm] waveguide side trench width
+num_modes = 1 # [-] number of modes
+boundary = 'TE'

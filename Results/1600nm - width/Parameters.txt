@@ -1,0 +1,56 @@
+Broader width +200 nm
+
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Nov 28 00:13:17 2025
+
+@author: PC
+"""
+
+import emodeconnection as emc
+import numpy as np
+
+EMODE_CMD = r"C:\Program Files\EModePhotonix\EMode\EMode.exe"
+
+## Set simulation parameters
+dx, dy = 10, 10 # [nm] resolution
+h_core = 600 # [nm] waveguide core height
+b_clad = 2500 # [nm] waveguide top and bottom clad
+h_clad = 1500 # [nm] waveguide top and bottom clad
+w_core = 1600 # [nm] waveguide core width
+w_trench = 2500 # [nm] waveguide side trench width
+num_modes = 1 # [-] number of modes
+boundary = 'TE'
+
+# FH Generation:
+wav_nm_ = np.arange(1520, 1600, 5) # [nm]    
+
+# SH Generation:
+#wav_nm_ = np.arange(760, 800, 2.5) # [nm]
+
+## Connect and initialize EMode
+em = emc.EMode(emode_cmd=[EMODE_CMD], simulation_name ='dispersionSiN')
+
+## Settings
+em.settings(
+    x_resolution = dx, y_resolution = dy,
+    window_width = w_core + w_trench*2,
+    window_height = h_core + b_clad + h_clad,
+    num_modes = num_modes, boundary_condition = boundary,
+    background_material = 'SiO2')
+
+## Draw shapes
+em.shape(name = 'BOX', material = 'SiO2', height = b_clad)
+em.shape(name = 'core', material = 'SiN', width = w_core,
+    height = h_core)
+
+## Run wavelength sweep
+data = em.sweep(key = 'wavelength', values = wav_nm_,
+    result = ['effective_index'])
+
+em.report()
+
+em.plot()
+
+## Close EMode
+em.close()
