@@ -8,6 +8,12 @@ The goal is to analyze and model the nonlinear dynamics of AOP-assisted SHG on C
 
 ## 🔬 Project Structure
 
+### 📁 `BECO_PIC_Report.pdf/` 
+Detailed report and analysis of the results.
+
+### 📁 `BECO_PIC_Slides-Presentation.pdf/` 
+Slides showing the results of the project.
+
 ### 📁 `EMode Codes/`
 Scripts for sweeping and extracting modal data from straight waveguides using Lumerical EMode simulations.
 
